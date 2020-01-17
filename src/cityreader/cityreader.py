@@ -33,7 +33,7 @@ def cityreader(cities=[]):
       if line_count == 0:
         line_count += 1
       else:
-        cities.append(City(row[0], row[3], row[4]))
+        cities.append(City(row[0], float(row[3]), float(row[4])))
         line_count += 1
   return cities
 
@@ -73,10 +73,15 @@ for c in cities:
 # Salt Lake City: (40.7774,-111.9301)
 
 # TODO Get latitude and longitude values from the user
+# lat1 = input("Enter latitude 1:")
+# lon1 = input("Enter longitude 1:")
+# lat2 = input("Enter latitude 2:")
+# lon2 = input("Enter longitude 2:")
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
   within = []
+  # if abs(lat1 - lat2) in range()
 
   # TODO Ensure that the lat and lon valuse are all floats
   # Go through each city and check to see if it falls within 

@@ -27,7 +27,7 @@ print("Starts with D:")
 a = []
 for i in humans:
     if i.name[0] == 'D':
-        a.append(i)
+        a.append(i.name)
 print(a)
 
 # Write a list comprehension that creates a list of names of everyone
@@ -36,7 +36,7 @@ print("Ends with e:")
 b = []
 for i in humans:
     if i.name[-1] == 'e':
-        b.append(i)
+        b.append(i.name)
 print(b)
 
 # Write a list comprehension that creates a list of names of everyone
@@ -45,7 +45,7 @@ print("Starts between C and G, inclusive:")
 c = []
 for i in humans:
     if ord(i.name[0]) in range(ord('C'), ord('H')):
-        c.append(i)
+        c.append(i.name)
 print(c)
 
 # Write a list comprehension that creates a list of all the ages plus 10.
@@ -82,7 +82,7 @@ g = []
 new_humans = humans.copy()
 
 for i in new_humans:
-    g.append((i.name.upper(), i.age + 5))
+    g.append(Human(i.name.upper(), i.age + 5))
 print(g)
 
 # Write a list comprehension that contains the square root of all the ages.
