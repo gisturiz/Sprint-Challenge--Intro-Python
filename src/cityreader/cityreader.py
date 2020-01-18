@@ -1,4 +1,5 @@
 import csv
+from numpy import arange
 
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
@@ -73,18 +74,68 @@ for c in cities:
 # Salt Lake City: (40.7774,-111.9301)
 
 # TODO Get latitude and longitude values from the user
-# lat1 = input("Enter latitude 1:")
-# lon1 = input("Enter longitude 1:")
-# lat2 = input("Enter latitude 2:")
-# lon2 = input("Enter longitude 2:")
 
-def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
-  # within will hold the cities that fall within the specified region
-  within = []
-  # if abs(lat1 - lat2) in range()
+# def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
+#   # within will hold the cities that fall within the specified region
+#   within = []
 
-  # TODO Ensure that the lat and lon valuse are all floats
+# Establishing Highest and Lowest Latitude and Longitude:
+
+high_lat = 0.0
+
+for i in cities:
+  if i.lat > high_lat:
+   high_lat = i.lat
+print(high_lat)
+
+low_lat = high_lat
+
+for i in cities:
+  if i.lat < low_lat:
+    low_lat = i.lat
+print(low_lat)
+
+high_lon = 0.0
+
+for i in cities:
+  if i.lon < high_lon:
+   high_lon = i.lon
+print(high_lon)
+
+low_lon = high_lon
+
+for i in cities:
+  if i.lon > low_lon:
+    low_lon = i.lon
+print(low_lon)
+
+# User inputs for lat1, lat2, lon1 and lon2
+
+lat1, lon1 = map(float, input('Please input lat1 & lon1: ').replace(',', '').split())
+lat2, lon2 = map(float, input('Please input lat2 & lon2: ').replace(',', '').split())
+print(lat1,lat2, lon1, lon2)
+
+if lat1 > lat2:
+  temp = lat1
+  lat1 = lat2
+  lat2 = temp
+print(lat1, lat2)
+if lon1 > lon2:
+  temp = lon1
+  lon1 = lon2
+  lon2 = temp
+print(lon1, lon2)
+
+within = []
+
+for i in cities:
+  print(i.lat, i.lon)
+  if ((i.lat > lat1 and i.lat < lat2)) and ((i.lon > lon1 and i.lon < lon2)):
+    within.append((i.name, (i.lat, i.lon)))
+
+print(within)
+
+  # TODO Ensure that the lat and lon values are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
 
-  return within
