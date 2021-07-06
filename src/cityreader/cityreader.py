@@ -1,6 +1,13 @@
+import csv
+from numpy import arange
+
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
-
+class City:
+  def __init__(self, name, lat, lon):
+    self.name = name
+    self.lat = lat
+    self.lon = lon
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -20,14 +27,22 @@ def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-    
-    return cities
+  with open('src/cityreader/cities.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter = ',')
+    line_count = 0
+    for row in csv_reader:
+      if line_count == 0:
+        line_count += 1
+      else:
+        cities.append(City(row[0], float(row[3]), float(row[4])))
+        line_count += 1
+  return cities
 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
-    print(c)
+    print((c.name, c.lat, c.lon))
 
 # STRETCH GOAL!
 #
@@ -60,12 +75,67 @@ for c in cities:
 
 # TODO Get latitude and longitude values from the user
 
-def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
-  # within will hold the cities that fall within the specified region
-  within = []
+# def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
+#   # within will hold the cities that fall within the specified region
+#   within = []
 
-  # TODO Ensure that the lat and lon valuse are all floats
+# Establishing Highest and Lowest Latitude and Longitude:
+
+high_lat = 0.0
+
+for i in cities:
+  if i.lat > high_lat:
+   high_lat = i.lat
+print(high_lat)
+
+low_lat = high_lat
+
+for i in cities:
+  if i.lat < low_lat:
+    low_lat = i.lat
+print(low_lat)
+
+high_lon = 0.0
+
+for i in cities:
+  if i.lon < high_lon:
+   high_lon = i.lon
+print(high_lon)
+
+low_lon = high_lon
+
+for i in cities:
+  if i.lon > low_lon:
+    low_lon = i.lon
+print(low_lon)
+
+# User inputs for lat1, lat2, lon1 and lon2
+
+lat1, lon1 = map(float, input('Please input lat1 & lon1: ').replace(',', '').split())
+lat2, lon2 = map(float, input('Please input lat2 & lon2: ').replace(',', '').split())
+print(lat1,lat2, lon1, lon2)
+
+if lat1 > lat2:
+  temp = lat1
+  lat1 = lat2
+  lat2 = temp
+print(lat1, lat2)
+if lon1 > lon2:
+  temp = lon1
+  lon1 = lon2
+  lon2 = temp
+print(lon1, lon2)
+
+within = []
+
+for i in cities:
+  print(i.lat, i.lon)
+  if ((i.lat > lat1 and i.lat < lat2)) and ((i.lon > lon1 and i.lon < lon2)):
+    within.append((i.name, (i.lat, i.lon)))
+
+print(within)
+
+  # TODO Ensure that the lat and lon values are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
 
-  return within
